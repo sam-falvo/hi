@@ -1,3 +1,7 @@
+// BUILD WITH:  gcc -o hi hi.cpp `wx-config --cflags` `wx-config --libs` 
+
+#include <iostream>
+
 #include <wx/wxprec.h>
 
 #ifndef WX_PRECOMP
@@ -8,25 +12,23 @@
 
 class HiWindow : public wxFrame {
 public:
-	HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size);
-
-private:
-	void onExit(wxCommandEvent& e);
-	wxDECLARE_EVENT_TABLE();
+	HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
+	: wxFrame(NULL, wxID_ANY, title, pos, size) {}
 };
-
-wxBEGIN_EVENT_TABLE(HiWindow, wxFrame)
-wxEND_EVENT_TABLE()
 
 /****** Application Entry Point ******/
 
 class HiApp : public wxApp {
-	public:
-	virtual bool onInit();
+	HiWindow *m_window;
+
+public:
+	virtual bool OnInit();
 };
 
 
-bool HiApp::onInit() {
+bool HiApp::OnInit() {
+	m_window = new HiWindow("Hi there!", wxDefaultPosition, wxDefaultSize);
+	m_window->Show(true);
 	return true;
 }
 
