@@ -19,7 +19,17 @@ enum {
 class HiWindow : public wxFrame {
 public:
 	HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size);
+
+private:
+	wxDECLARE_EVENT_TABLE();
+	void OnHello(wxCommandEvent& e);
+	void OnExit(wxCommandEvent& e);
 };
+
+wxBEGIN_EVENT_TABLE(HiWindow, wxFrame)
+	EVT_MENU(ID_HELLO, HiWindow::OnHello)
+	EVT_MENU(wxID_EXIT, HiWindow::OnExit)
+wxEND_EVENT_TABLE()
 
 HiWindow::HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
 		: wxFrame(NULL, wxID_ANY, title, pos, size) {
@@ -34,6 +44,14 @@ HiWindow::HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size
 
 	CreateStatusBar();
 	SetStatusText("Smashing!");
+}
+
+void HiWindow::OnHello(wxCommandEvent& unusedEvent) {
+	wxLogMessage("Hello father!");
+}
+
+void HiWindow::OnExit(wxCommandEvent& unusedEvent) {
+	Close(true);
 }
 
 /****** Application Entry Point ******/
