@@ -16,7 +16,19 @@ public:
 };
 
 HiWindow::HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
-	: wxFrame(NULL, wxID_ANY, title, pos, size) {
+		: wxFrame(NULL, wxID_ANY, title, pos, size) {
+	wxMenu *m = new wxMenu;
+	m->Append(wxID_NEW);
+	m->Append(wxID_OPEN);
+	m->Append(wxID_SAVE);
+	m->Append(wxID_SAVEAS);
+	m->AppendSeparator();
+	m->Append(wxID_EXIT);
+
+	wxMenuBar *mb = new wxMenuBar;
+	mb->Append(m, "&Project");
+	SetMenuBar(mb);
+
 	CreateStatusBar();
 	SetStatusText("Smashing!");
 }
