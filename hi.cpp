@@ -12,9 +12,14 @@
 
 class HiWindow : public wxFrame {
 public:
-	HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
-	: wxFrame(NULL, wxID_ANY, title, pos, size) {}
+	HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size);
 };
+
+HiWindow::HiWindow(const wxString& title, const wxPoint& pos, const wxSize& size)
+	: wxFrame(NULL, wxID_ANY, title, pos, size) {
+	CreateStatusBar();
+	SetStatusText("Smashing!");
+}
 
 /****** Application Entry Point ******/
 
